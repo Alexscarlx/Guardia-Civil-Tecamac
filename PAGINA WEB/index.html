@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Página Principal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bellota&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Lucida Bright", sans-serif;
+            font-style: italic;
+            background-color: #31363c; /* Fondo principal */
+        }
+        .barra-menu {
+            background-color: #114c5f; /* Color de la barra */
+            height: 2cm;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            position: fixed; /* Barra fija en la parte superior */
+            width: 100%; /* Ancho completo */
+            top: 0; /* Posición arriba */
+            z-index: 1000; /* Z-index alto para que esté por encima del contenido */
+        }
+        .barra-menu a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        .logo {
+            width: 1.3cm; /* Tamaño del logo */
+            border: 0.1cm solid black; /* Borde negro de 0.1cm */
+        }
+        .espacio-imagen {
+
+            position: relative;
+
+            height: 17cm;
+            background-image: url("img/baner1.jpg");
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            margin-top: 2cm; /* Espacio para la barra de menú fija */
+            border: 0.5cm solid black; /* Borde de 0.5cm de color negro */
+        }
+        .espacio-imagen::before {
+            content: "";
+            background: rgba(0, 0, 0, 0.5); /* Fondo negro semi-transparente */
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+        .guardia-civil-container {
+            text-align: center;
+            position: relative;
+            z-index: 1; /* Para colocar el texto sobre el fondo oscurecido */
+        }
+        .guardia-civil {
+            color: white;
+            font-size: 70px; /* Tamaño de fuente */
+            font-family: "Bellota", sans-serif;
+            background-color: rgba(0, 0, 0, 0.75); /* Negro con transparencia */
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 10px; /* Espacio inferior */
+            border: 0.1cm solid white; /* Borde blanco de 0.1cm */
+        }
+        .texto-adicional {
+            color: white;
+            font-size: 20px; /* Tamaño de fuente */
+            font-family: "Lucida Bright", sans-serif;
+            background-color: rgba(0, 0, 0, 0.75); /* Negro con transparencia */
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: 0.1cm solid white; /* Borde blanco de 0.1cm */
+        }
+
+        /* Barra de menú móvil */
+        .barra-menu-movil {
+            background-color: #114c5f; /* Color de la barra */
+            height: 2cm;
+            display: none; /* Oculta por defecto */
+            position: absolute; /* Barra relativa al contenido */
+            width: 100%; /* Ancho completo */
+            top: 2cm; /* Espacio después de la barra fija */
+            left: 0;
+            z-index: 1000; /* Z-index alto para que esté por encima del contenido */
+        }
+        .barra-menu-movil a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        /* Mostrar la barra móvil al hacer scroll */
+        .mostrar-barra-menu-movil {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        /* Espacio negro debajo de la imagen */
+        .espacio-negro-imagen {
+            height: 16cm;
+            background-color: #152a35;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .texto-que-somos,
+        .texto-guardia-civil,
+        .texto-organizacion {
+            color: white;
+            font-size: 20px; /* Tamaño de fuente */
+            font-family: "Bellota", sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .texto-que-somos {
+            font-size: 45px;
+            font-style: italic;
+        }
+        .imagenes-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .imagen {
+            width: 10cm;
+            height: auto; /* Para mantener la proporción de la imagen */
+            margin: 10px; /* Espacio entre las imágenes */
+            border: 1px solid black;
+            transition: transform 0.3s ease; /* Transición al pasar el mouse */
+            border-radius: 10px; /* Esquinas redondeadas */
+        }
+
+        /* Efecto de agrandar al pasar el mouse */
+        .imagen:hover {
+            transform: scale(1.05); /* Aumenta el tamaño al 105% */
+        }
+
+        /* Secciones nuevas */
+        .seccion-1,
+        .seccion-2,
+        .nueva-seccion,
+        .nueva-seccion-bajo-baner {
+            font-family: "Bellota", sans-serif; /* Cambio de fuente */
+            text-align: center; /* Centrar texto */
+        }
+
+        .seccion-1 {
+            width: 60%;
+            height: 18cm;
+            background-color: #022435;
+            border: 0.5cm solid black;
+            float: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .seccion-2 {
+            width: 35%;
+            height: 18cm;
+            background-color: #002B42;
+            border: 0.5cm solid black;
+            float: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Texto de tamaño 40 */
+        .texto-seccion {
+            font-size: 40px;
+            color: white;
+            background-color: #0f1a25c7;
+            border: 0.2cm solid white;
+            padding: 20px;
+            border-radius: 3px;
+            text-align: center;
+            width: 7cm; /* Ancho del cuadro */
+            height: 2cm; /* Alto del cuadro */
+            margin: 0.1cm; /* Margen del cuadro */
+        }
+
+        /* Nueva sección con imagen y oscurecimiento */
+        .nueva-seccion {
+            position: relative;
+            width: 100%;
+            height: 18.5cm;
+            background-image: url("img/baner2.jpeg");
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+        }
+        .nueva-seccion::before {
+            content: "";
+            background: rgba(0, 0, 0, 0.75); /* Fondo negro semi-transparente */
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+        .texto-seccion-nueva {
+            position: absolute;
+            color: white;
+            font-size: 40px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            border: 0.2cm solid white;
+            border-radius: 3px;
+            text-align: center;
+            width: 50%; /* Ancho del cuadro */
+            max-width: 600px;
+            background-color: rgba(0, 0, 0, 0.75); /* Negro con transparencia del 75% */
+        }
+
+        /* Nueva sección abajo de la sección baner2.jpeg */
+        .nueva-seccion-bajo-baner {
+            width: 100%;
+            height: 19cm;
+            background-color: #03282D; /* Cambio de color */
+            border: 0.5cm solid black;
+            margin-top: 0.4cm; /* Cambio de margen */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .texto-nueva-seccion-bajo-baner {
+            color: white;
+            font-size: 20px;
+            text-align: center;
+            max-width: 80%;
+            padding: 20px;
+        }
+
+        /* Estilo para las imágenes de equipamiento */
+        .imagen-nueva {
+            width: 12.5cm;
+            height: 5cm;
+            margin: 10px;
+            transition: transform 0.3s ease; /* Efecto al pasar el mouse */
+        }
+
+        /* Efecto de agrandar al pasar el mouse sobre las imágenes */
+        .imagen-nueva:hover {
+            transform: scale(1.05); /* Aumenta el tamaño al 105% */
+        }
+    </style>
+</head>
+<body>
+    <div class="barra-menu">
+        <div>
+            <a href="quierounirme.html">Quiero Unirme</a> <!-- Cambio de texto -->
+            <a href="contacto.html">Contacto</a>
+            <a href="https://www.gob.mx/sedena" target="_blank">SEDENA</a> <!-- Nuevo botón -->
+            <a href="https://www.gob.mx/guardianacional" target="_blank">Guardia Nacional</a> <!-- Nuevo botón -->
+        </div>
+        <img src="img/logo.jpg" alt="Logo" class="logo">
+        <div></div> <!-- Espacio vacío para centrar el logo -->
+    </div>
+
+    <!-- Barra de menú móvil -->
+    <div class="barra-menu-movil">
+        <div>
+            <a href="historia.html">Quiero Unirme</a> <!-- Cambio de texto -->
+            <a href="contacto.html">Contacto</a>
+        </div>
+        <img src="img/logo.jpg" alt="Logo" class="logo">
+        <div></div> <!-- Espacio vacío para centrar el logo -->
+    </div>
+
+    <div class="espacio-negro-menu"></div> <!-- Barra de color negro debajo de la barra de menú -->
+    <div class="espacio-imagen">
+        <div class="guardia-civil-container">
+            <p class="guardia-civil">Guardia Civil - Tecámac</p>
+            <p class="texto-adicional">Juntos para la protección y seguridad del pueblo</p>
+        </div>
+    </div>
+    <div class="espacio-negro-imagen">
+        <p class="texto-que-somos">¿Qué somos?</p>
+        <p class="texto-guardia-civil">La Guardia Civil de Tecámac es una institución vital en la vida y seguridad de este municipio del Estado de México. Como comisaría local, desempeña un papel fundamental en el resguardo y protección de los habitantes y las propiedades de la región. Su presencia brinda tranquilidad a los ciudadanos, asegurando un entorno seguro para vivir, trabajar y desarrollarse.</p>
+        <div class="imagenes-container">
+            <img src="img/i1.jpg" alt="Imagen 1" class="imagen">
+            <img src="img/i2.jpg" alt="Imagen 2" class="imagen">
+            <img src="img/i3.jpg" alt="Imagen 3" class="imagen">
+        </div>
+    </div> <!-- Espacio negro de 16cm debajo de la imagen -->
+    <div class="seccion-1">
+        <p class="texto-seccion">Organización</p>
+        <p class="texto-organizacion">Atendiendo a sus orígenes, es necesario entender la GN desde el punto de vista de la militarización. Debemos recordar que la militarización de las instituciones civiles se entiende como la incorporación de aspectos militares en términos de equipamiento, cultura, organización y operación.</p>
+        <p class="texto-organizacion">A finales de 2022 la Guardia Nacional contaba con una fuerza operativa de 128 mil 233 personas, comparado con 98 mil 740 a finales de 2020. Desde su creación, una gran proporción de su personal en realidad son soldados y marinos que prestan servicios en la Guardia de manera temporal</p>
+        <p class="texto-organizacion">El gobierno indica que en tres años se han incorporado 61 mil 703 miembros, una cantidad que casi corresponde con las plazas asignadas para la Guardia en el presupuesto para 2022. Mirando el presupuesto, aproximadamente 70% de reclutas en 2022 eran policías militares adscritos a la Sedena y 30% policías navales adscritos a la Semar; desde septiembre de 2022 una reforma a la Ley de la Guardia Nacional, requirió la transferencia de la totalidad de estos reclutas a la Sedena.</p>
+    </div>
+    <div class="seccion-2">
+        <img src="img/gra1.png" alt="Grafico 1" class="imagen" style="width: 8cm;">
+        <img src="img/gra2.jpg" alt="Grafico 2" class="imagen" style="width: 8cm;"> 
+    </div>
+    <div class="nueva-seccion">
+        <div class="texto-seccion-nueva">Material</div>
+    </div>
+    <!-- Nueva sección abajo de la sección baner2.jpeg -->
+    <div class="nueva-seccion-bajo-baner">
+        <div class="texto-nueva-seccion-bajo-baner">
+            En términos de los materiales y equipamiento de la GN, existe el mismo panorama: el equipo básico proviene de las Fuerzas Armadas, con algunas adaptaciones en respuesta a la amplia gama de tareas que le corresponde a la GN.<br><br>
+            El arma primaria de la GN es el rifle de asalto Fx-05, diseñado y fabricado por la Sedena para uso en el ejército. El arma secundaria es una pistola semiautomática de calibre 9mm marca Sig Sauer, también preferida por las Fuerzas Armadas en México. Además del equipo letal, la GN dispone de equipo de protección personal, bastones policiales y equipo de gases lacrimógenos para el control de multitudes; estos en manos de personal militar y bajo el mando operativo directo de las Fuerzas Armadas.<br><br>
+            Finalmente, la Guardia cuenta con equipamiento bélico especializado, como los rifles de calibre .50″, diseñados para penetrar vehículos y aeronaves. A finales de 2021, la Guardia contaba con 224 rifles de calibre .50″ – 50 adquiridos en 2019 y otros 174 transferidos de la Sedena. Basado en la plataforma del fusil FX-05, la Sedena ha desarrollado la capacidad de fabricar otras armas como subametralladoras y rifles calibre .50″; de esta manera ha crecido su capacidad de incorporar más material bélico en la nueva fuerza de seguridad pública.
+        </div>
+        <div class="imagenes-container">
+            <img src="img/i4.jpg" alt="Imagen 1" class="imagen-nueva">
+            <img src="img/i5.jpg" alt="Imagen 2" class="imagen-nueva">
+            <img src="img/i6.jpeg" alt="Imagen 3" class="imagen-nueva">
+        </div>
+    </div>
+
+    <!-- Pie de página -->
+    <footer>
+        <div style="background-color: #114c5f; /* Color de fondo */
+                    color: white; /* Color del texto */
+                    text-align: center; /* Alinear texto al centro */
+                    padding: 10px; /* Espaciado interno */
+                    position: fixed; /* Fijar posición */
+                    width: 100%; /* Ancho completo */
+                    bottom: 0; /* Posición abajo */
+                    z-index: 1000; /* Z-index alto para que esté por encima del contenido */
+                    font-family: 'Lucida Bright', sans-serif; /* Fuente del texto */
+                    font-size: 18px; /* Tamaño de la fuente */">
+            © 2024 Guardia Civil Tecámac - Todos los derechos reservados
+        </div>
+    </footer>
+</body>
+</html>
